@@ -18,6 +18,7 @@ import rebus.permissionutils.AskAgainCallback;
 import rebus.permissionutils.FullCallback;
 import rebus.permissionutils.PermissionEnum;
 import rebus.permissionutils.PermissionManager;
+import rebus.permissionutils.SimpleCallback;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,10 +27,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_container);
-        FragmentManager fragmentManager=getFragmentManager();
-        FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frag_container,new SettingsFragment());
-        fragmentTransaction.commit();
         request();
     }
 
@@ -43,9 +40,15 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 })
-                .callback(new FullCallback() {
+                .callback(new SimpleCallback() {
                     @Override
-                    public void result(ArrayList<PermissionEnum> permissionsGranted, ArrayList<PermissionEnum> permissionsDenied, ArrayList<PermissionEnum> permissionsDeniedForever, ArrayList<PermissionEnum> permissionsAsked) {
+                    public void result(boolean allPermissionsGranted) {
+                        if(allPermissionsGranted){
+                            FragmentManager fragmentManager=getFragmentManager();
+                            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.frag_container,new SettingsFragment());
+                            fragmentTransaction.commit();
+                        }
                     }
                 })
                 .ask(this);

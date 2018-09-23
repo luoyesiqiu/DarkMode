@@ -23,32 +23,41 @@ public class SettingsFragment extends PreferenceFragment {
     private CheckBoxPreference openPreference;
     private ListPreference modePreference;
     private Properties properties;
+    private  final  String comment="It's a settings.";
     public final static   File PROP_FILE=new File("/sdcard/darkmode/settings.ini");
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         addPreferencesFromResource(R.xml.settings);
         openPreference=(CheckBoxPreference) findPreference("switch");
         modePreference=(ListPreference) findPreference("mode");
-        if(!PROP_FILE.exists()){
-            PROP_FILE.getParentFile().mkdir();
-        }
         properties=new Properties();
 
         try {
             properties.load(new FileReader(PROP_FILE));
-            if(properties.getProperty("open").equals("false")){
+            if(!PROP_FILE.exists()||properties.getProperty("open").equals("false")){
                 openPreference.setChecked(false);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if(!PROP_FILE.exists()){
+            PROP_FILE.getParentFile().mkdir();
+            properties.setProperty("open","false");
+            properties.setProperty("mode","0");
+            try {
+                properties.store(new FileOutputStream(PROP_FILE),comment);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         openPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 boolean open=(boolean)o;
                 properties.setProperty("open",open+"");
                 try {
-                    properties.store(new FileOutputStream(PROP_FILE),"open");
+                    properties.store(new FileOutputStream(PROP_FILE),comment);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

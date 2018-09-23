@@ -8,6 +8,8 @@
     <string name="author">落叶似秋 制作</string>
     <string name="help_title">使用说明</string>
     <string name="author_title">软件信息</string>
+    <string name="project_title">项目地址</string>
+    <string name="github">https://github.com/luoyesiqiu/DarkMode</string>
     <string-array name="mode_title">
         <item>夜间</item>
         <item>护眼</item>

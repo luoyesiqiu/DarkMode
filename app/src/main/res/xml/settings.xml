@@ -3,6 +3,7 @@
     <PreferenceCategory android:title="@string/setting">
     <CheckBoxPreference
     android:title="@string/is_open"
+        android:defaultValue="false"
     android:key="switch">
 
     </CheckBoxPreference>
@@ -24,7 +25,10 @@
         <Preference
             android:title="@string/author_title"
             android:summary="@string/author">
-
+        </Preference>
+        <Preference
+            android:title="@string/project_title"
+            android:summary="@string/github">
         </Preference>
     </PreferenceCategory>
 </PreferenceScreen>
