@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">夜间模式</string>
+    <string name="is_open">总开关</string>
+    <string name="color_mode">选择主题</string>
+    <string name="setting">设置</string>
+    <string name="about">关于</string>
+    <string name="help">更改设置后重新启动APP生效</string>
+    <string name="author">落叶似秋 制作</string>
+    <string name="help_title">使用说明</string>
+    <string name="author_title">软件信息</string>
+    <string-array name="mode_title">
+        <item>夜间</item>
+        <item>护眼</item>
+    </string-array>
+    <string-array name="mode_value">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+</resources>
